@@ -9,4 +9,16 @@
     <string name="text_description_intro_3">Receba alertas quando quiser</string>
     <string name="text_description_intro_4">Use no seu smartphone e acessando o \nOrganizze pelo site</string>
     <string name="text_caption_intro_4">Tudo organizado, \nno celular ou computador</string>
+    <string name="text_caption_intro_cadastro">Crie sua conta grátis</string>
+    <string name="ja_tenho_conta_text">Já tenho conta</string>
+    <string name="cadastre_se_button_text">Cadastre-se</string>
+    <string name="text_description_intro_cadastro">Junte-se a mais de meio milhão \nde pessoas e comece já</string>
+    <string name="text_caption_cadastroAc">Crie sua conta grátis</string>
+    <string name="nome_plainText_text">Nome</string>
+    <string name="email_plainText_text">Email</string>
+    <string name="senha_plainText_text">Senha</string>
+    <string name="cadastrar_buttonText_cadastroAc">Cadastrar</string>
+    <string name="termos_de_usoText_cadastroAC">Termos de uso</string>
+    <string name="text_caption_loginAc">Acesse sua conta</string>
+    <string name="entrar_buttonText_loginAc">Entrar</string>
 </resources>
