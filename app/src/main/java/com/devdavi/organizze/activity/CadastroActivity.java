@@ -1,5 +1,8 @@
 package com.devdavi.organizze.activity;
 
+import static com.devdavi.organizze.utils.Validadores.criaMensagem;
+import static com.devdavi.organizze.utils.Validadores.verificaCampo;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -58,8 +61,7 @@ public class CadastroActivity extends AppCompatActivity {
         autenticacao.createUserWithEmailAndPassword(usuario.getEmail(), usuario.getSenha())
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Sucesso ao cadastrar o usuário", Toast.LENGTH_LONG)
-                                .show();
+                        finish();
                     } else {
                         String excecao;
                         try {
@@ -81,25 +83,4 @@ public class CadastroActivity extends AppCompatActivity {
                 });
     }
 
-    @NonNull
-    private String criaMensagem(List<String> camposVazios) {
-        String mensagem;
-        StringBuilder sb = new StringBuilder();
-        for (String campo : camposVazios) {
-            sb.append(campo).append(", ");
-        }
-        mensagem = sb.toString().trim();
-        return mensagem.substring(0, mensagem.length() - 1);
-    }
-
-    private List<String> verificaCampo(String nome, String textoEmail, String textoSenha) {
-        List<String> retorno = new ArrayList<>();
-        if (nome.isEmpty())
-            retorno.add("nome");
-        if (textoEmail.isEmpty())
-            retorno.add("email");
-        if (textoSenha.isEmpty())
-            retorno.add("senha");
-        return retorno;
-    }
 }

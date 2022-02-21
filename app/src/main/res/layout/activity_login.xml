@@ -27,13 +27,13 @@
         android:textColor="@color/black"
         android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextEmail2"
+        app:layout_constraintBottom_toTopOf="@+id/editEmailLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <EditText
-        android:id="@+id/editTextTextEmail2"
+        android:id="@+id/editEmailLogin"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_marginStart="32dp"
@@ -46,14 +46,14 @@
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextSenha2"
+        app:layout_constraintBottom_toTopOf="@+id/editSenhaLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/editTextTextSenha2"
+        android:id="@+id/editSenhaLogin"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_marginStart="32dp"
@@ -66,14 +66,14 @@
         android:importantForAutofill="no"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCadastrar2"
+        app:layout_constraintBottom_toTopOf="@+id/buttonEntrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmail2"
+        app:layout_constraintTop_toBottomOf="@+id/editEmailLogin"
         tools:ignore="TextContrastCheck" />
 
     <Button
-        android:id="@+id/buttonCadastrar2"
+        android:id="@+id/buttonEntrar"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_marginStart="32dp"
@@ -86,6 +86,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextSenha2" />
+        app:layout_constraintTop_toBottomOf="@+id/editSenhaLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
