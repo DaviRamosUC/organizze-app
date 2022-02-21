@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/activity_main.xml" value="0.225" />
+        <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/intro_1.xml" value="0.25" />
+        <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/intro_2.xml" value="0.225" />
+        <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/intro_3.xml" value="0.225" />
+        <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/intro_4.xml" value="0.225" />
+        <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/intro_5.xml" value="0.225" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
