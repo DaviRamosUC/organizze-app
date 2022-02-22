@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/drawable/ic__email_cinza_24.xml" value="0.141" />
+        <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/drawable/ic_adicionar_branco_24.xml" value="0.1415" />
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/drawable/ic_cadeado_cinza_24.xml" value="0.141" />
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/drawable/ic_logo.xml" value="0.1045" />
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/drawable/ic_pessoa_cinza_24.xml" value="0.141" />
@@ -11,6 +12,9 @@
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/activity_main.xml" value="0.225" />
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/activity_principal.xml" value="0.225" />
+        <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/content_principal.xml" value="0.22" />
+        <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/fragment_first.xml" value="0.1" />
+        <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/fragment_second.xml" value="0.1" />
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/intro_1.xml" value="0.25" />
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/intro_2.xml" value="0.225" />
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/intro_3.xml" value="0.225" />
