@@ -26,14 +26,14 @@ public class PrincipalActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
-    }
 
-    private void adicionarReceita(View view){
+        binding.menuReceita.setOnClickListener(view -> {
+            startActivity(new Intent(this, ReceitasActivity.class));
+        });
 
-    }
-
-    private void adicionarDespesa(View view){
-
+        binding.menuDespesa.setOnClickListener(view -> {
+            startActivity(new Intent(this, DespesasActivity.class));
+        });
     }
 
 }

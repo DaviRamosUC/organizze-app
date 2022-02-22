@@ -19,6 +19,22 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="despesasTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:colorPrimary">@color/colorPrimaryDespesa</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDarkDespesa</item>
+        <item name="android:colorAccent">@color/colorPrimaryAccentDespesa</item>
+    </style>
+
+    <style name="receitasTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:colorPrimary">@color/colorPrimaryReceita</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDarkReceita</item>
+        <item name="android:colorAccent">@color/colorPrimaryAccentReceita</item>
+    </style>
+
     <style name="Theme.Organizze.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Organizze.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
