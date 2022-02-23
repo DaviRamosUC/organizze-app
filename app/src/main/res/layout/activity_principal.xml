@@ -10,7 +10,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.Organizze.AppBarOverlay">
+        android:theme="@style/Theme.Organizze.AppBarOverlay"
+        app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -21,7 +22,9 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_principal" />
+    <include
+        android:id="@+id/contentPrincipal"
+        layout="@layout/content_principal" />
 
     <com.github.clans.fab.FloatingActionMenu
         android:layout_width="wrap_content"

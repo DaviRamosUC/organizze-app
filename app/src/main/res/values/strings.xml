@@ -34,4 +34,8 @@
     <string name="data_text_hint">Data: 01/01/2022</string>
     <string name="categoria_text_hint">Categoria: Salário</string>
     <string name="descricao_text_hint">Descrição: Salário mensal</string>
+    <string name="saldo_geral">Saldo geral</string>
+    <string name="valor_inicial_content_printipal">R$ 0</string>
+    <string name="carregando_text">Carregando...</string>
+    <string name="sair_text">Sair</string>
 </resources>

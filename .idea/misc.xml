@@ -12,9 +12,9 @@
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/activity_despesas.xml" value="0.33" />
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/activity_main.xml" value="0.225" />
-        <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/activity_principal.xml" value="0.1" />
+        <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/activity_principal.xml" value="0.15" />
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/activity_receitas.xml" value="0.25" />
-        <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/content_principal.xml" value="0.22" />
+        <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/content_principal.xml" value="0.25" />
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/fragment_first.xml" value="0.1" />
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/fragment_second.xml" value="0.1" />
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/intro_1.xml" value="0.25" />
@@ -23,6 +23,7 @@
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/intro_4.xml" value="0.225" />
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/intro_5.xml" value="0.225" />
         <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/layout/intro_cadastro.xml" value="0.1" />
+        <entry key="..\:/workspaces/ws-android/Organizze/app/src/main/res/menu/menu_principal.xml" value="0.225" />
       </map>
     </option>
   </component>
