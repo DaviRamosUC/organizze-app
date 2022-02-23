@@ -8,7 +8,7 @@
     tools:context=".activity.DespesasActivity">
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/campoValor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDespesa"
@@ -34,7 +34,7 @@
         android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3">
+        app:layout_constraintTop_toBottomOf="@+id/campoValor">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
@@ -43,6 +43,7 @@
             android:layout_marginBottom="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editData"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/data_text_hint"
@@ -57,6 +58,7 @@
             android:layout_marginBottom="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editCategoria"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/categoria_text_hint"
@@ -70,6 +72,7 @@
             android:layout_marginBottom="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editDescricao"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/descricao_text_hint"
@@ -78,7 +81,7 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
