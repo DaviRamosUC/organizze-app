@@ -8,7 +8,7 @@
     tools:context=".activity.ReceitasActivity">
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/editcampoValor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryReceita"
@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2">
+        app:layout_constraintTop_toBottomOf="@+id/editcampoValor">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
@@ -45,6 +45,7 @@
             android:layout_marginBottom="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editCampoData"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/data_text_hint"
@@ -59,6 +60,7 @@
             android:layout_marginBottom="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editCampoCategoria"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/categoria_text_hint"
@@ -72,6 +74,7 @@
             android:layout_marginBottom="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editCampoDescricao"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/descricao_text_hint"
@@ -80,7 +83,7 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
