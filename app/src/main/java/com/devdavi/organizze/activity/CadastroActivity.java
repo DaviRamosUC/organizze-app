@@ -3,25 +3,20 @@ package com.devdavi.organizze.activity;
 import static com.devdavi.organizze.utils.Validadores.criaMensagem;
 import static com.devdavi.organizze.utils.Validadores.verificaCampo;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.devdavi.organizze.config.ConfiguracaoFirebase;
 import com.devdavi.organizze.databinding.ActivityCadastroBinding;
 import com.devdavi.organizze.model.Usuario;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.devdavi.organizze.utils.Base64Custom;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -61,6 +56,9 @@ public class CadastroActivity extends AppCompatActivity {
         autenticacao.createUserWithEmailAndPassword(usuario.getEmail(), usuario.getSenha())
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
+                        String idUsuario = Base64Custom.codificarBase64(usuario.getEmail());
+                        usuario.setIdUsuario(idUsuario);
+                        usuario.salvar();
                         finish();
                     } else {
                         String excecao;

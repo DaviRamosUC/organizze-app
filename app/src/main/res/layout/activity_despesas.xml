@@ -81,15 +81,15 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:backgroundTint="@color/colorPrimaryDespesa"
-        android:clickable="true"
         android:layout_marginBottom="16dp"
+        android:clickable="true"
         android:contentDescription="@string/image_description"
         android:focusable="true"
+        app:backgroundTint="@color/colorPrimaryDespesa"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_confirmar_branco_24"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
