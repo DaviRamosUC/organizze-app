@@ -7,10 +7,14 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.devdavi.organizze.R;
+import com.devdavi.organizze.adapter.AdapterMovimentacao;
 import com.devdavi.organizze.config.ConfiguracaoFirebase;
 import com.devdavi.organizze.databinding.ActivityPrincipalBinding;
+import com.devdavi.organizze.model.Movimentacao;
 import com.devdavi.organizze.model.Usuario;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,12 +25,18 @@ import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PrincipalActivity extends AppCompatActivity {
 
     private ActivityPrincipalBinding binding;
-    private String dataPesquisa;
     private MaterialCalendarView calendarView;
+    private RecyclerView recyclerView;
+
+    private String dataPesquisa;
+    List<Movimentacao> movimentacoes = new ArrayList<>();
+
     private FirebaseAuth auth;
     private DatabaseReference idUsuario;
     private DatabaseReference database;
@@ -55,6 +65,15 @@ public class PrincipalActivity extends AppCompatActivity {
         database = ConfiguracaoFirebase.getDatabase();
 
         calendarView = binding.contentPrincipal.calendarView;
+        recyclerView = binding.contentPrincipal.recyclerMovimentos;
+
+        movimentacoes.add(new Movimentacao("26/02/2000", "Salario", "Salario do mês", "r", 1000.0));
+        movimentacoes.add(new Movimentacao("26/02/2000", "Compras", "Sapato", "d", 1000.0));
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+        AdapterMovimentacao adapter = new AdapterMovimentacao(movimentacoes, getApplicationContext());
+        recyclerView.setAdapter(adapter);
 
         binding.menuReceita.setOnClickListener(view -> {
             startActivity(new Intent(this, ReceitasActivity.class));
@@ -64,6 +83,11 @@ public class PrincipalActivity extends AppCompatActivity {
             startActivity(new Intent(this, DespesasActivity.class));
         });
 
+    }
+
+    public void recuperaMovimentacoes(String dataPesquisa) {
+        String idUsuario = ConfiguracaoFirebase.getIdUsuarioCodificado();
+        database.child(idUsuario).child(dataPesquisa);
     }
 
     public void recuperarResumo() {

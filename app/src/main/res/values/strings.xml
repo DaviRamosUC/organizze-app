@@ -38,4 +38,7 @@
     <string name="valor_inicial_content_printipal">R$ 0</string>
     <string name="carregando_text">Carregando...</string>
     <string name="sair_text">Sair</string>
+    <string name="titulo">Titulo</string>
+    <string name="categoria">Categoria</string>
+    <string name="valor">valor</string>
 </resources>

@@ -24,6 +24,12 @@ public class ConfiguracaoFirebase {
         return database.getReference();
     }
 
+    public static String getIdUsuarioCodificado(){
+        String emailUsuario = Objects.requireNonNull(getAutenticacao().getCurrentUser()).getEmail();
+        assert emailUsuario != null;
+        return Base64Custom.codificarBase64(emailUsuario);
+    }
+
     public static DatabaseReference getIdUsuarioChild(){
         String emailUsuario = Objects.requireNonNull(getAutenticacao().getCurrentUser()).getEmail();
         assert emailUsuario != null;
