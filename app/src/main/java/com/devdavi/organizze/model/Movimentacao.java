@@ -8,7 +8,6 @@ import com.google.firebase.database.DatabaseReference;
 import java.util.Objects;
 
 public class Movimentacao {
-
     private String data;
     private String categoria;
     private String descricao;
@@ -66,13 +65,25 @@ public class Movimentacao {
         this.valor = valor;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Movimentacao{");
+        sb.append("data='").append(data).append('\'');
+        sb.append(", categoria='").append(categoria).append('\'');
+        sb.append(", descricao='").append(descricao).append('\'');
+        sb.append(", tipo='").append(tipo).append('\'');
+        sb.append(", valor=").append(valor);
+        sb.append('}');
+        return sb.toString();
+    }
+
     public void salvar() {
         FirebaseAuth auth = ConfiguracaoFirebase.getAutenticacao();
         DatabaseReference database = ConfiguracaoFirebase.getDatabase();
         String email = Base64Custom.codificarBase64(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail()));
         database.child("movimentacao")
                 .child(email)
-                .child(this.data.replace("/", "").substring(2,data.length()-2))
+                .child(this.data.replace("/", "").substring(2, data.length() - 2))
                 .push()
                 .setValue(this);
     }

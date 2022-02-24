@@ -2,6 +2,7 @@ package com.devdavi.organizze.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -21,31 +22,37 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PrincipalActivity extends AppCompatActivity {
 
     private ActivityPrincipalBinding binding;
     private MaterialCalendarView calendarView;
     private RecyclerView recyclerView;
+    private AdapterMovimentacao adapter;
 
-    private String dataPesquisa;
+    private String mesAnoSelecionado = "";
     List<Movimentacao> movimentacoes = new ArrayList<>();
 
-    private FirebaseAuth auth;
-    private DatabaseReference idUsuario;
-    private DatabaseReference database;
+    private final FirebaseAuth auth = ConfiguracaoFirebase.getAutenticacao();
+    ;
+    private final DatabaseReference idUsuario = ConfiguracaoFirebase.getIdUsuarioChild();
+    private final DatabaseReference database = ConfiguracaoFirebase.getDatabase();
+    ;
     private ValueEventListener evento;
+    private ValueEventListener valueEventListenerMovimentacoes;
 
     private Double despesaTotal = 0.0;
     private Double receitaTotal = 0.0;
     private Double resumoTotal = 0.0;
-    private final CharSequence meses[] = {
+    private final CharSequence[] meses = {
             "Janeiro", "Fevereiro", "Março",
             "Abril", "Maio", "Junho",
             "Julho", "Agosto", "Setembro",
@@ -60,19 +67,12 @@ public class PrincipalActivity extends AppCompatActivity {
         binding.toolbar.setTitle("");
         setSupportActionBar(binding.toolbar);
 
-        auth = ConfiguracaoFirebase.getAutenticacao();
-        idUsuario = ConfiguracaoFirebase.getIdUsuarioChild();
-        database = ConfiguracaoFirebase.getDatabase();
-
         calendarView = binding.contentPrincipal.calendarView;
         recyclerView = binding.contentPrincipal.recyclerMovimentos;
 
-        movimentacoes.add(new Movimentacao("26/02/2000", "Salario", "Salario do mês", "r", 1000.0));
-        movimentacoes.add(new Movimentacao("26/02/2000", "Compras", "Sapato", "d", 1000.0));
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        AdapterMovimentacao adapter = new AdapterMovimentacao(movimentacoes, getApplicationContext());
+        adapter = new AdapterMovimentacao(movimentacoes, getApplicationContext());
         recyclerView.setAdapter(adapter);
 
         binding.menuReceita.setOnClickListener(view -> {
@@ -85,9 +85,28 @@ public class PrincipalActivity extends AppCompatActivity {
 
     }
 
-    public void recuperaMovimentacoes(String dataPesquisa) {
+    public void recuperaMovimentacoes() {
         String idUsuario = ConfiguracaoFirebase.getIdUsuarioCodificado();
-        database.child(idUsuario).child(dataPesquisa);
+        valueEventListenerMovimentacoes = database.child("movimentacao")
+                .child(idUsuario)
+                .child(mesAnoSelecionado)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        movimentacoes.clear();
+                        for (DataSnapshot dados : snapshot.getChildren()) {
+                            Movimentacao movimentacao = dados.getValue(Movimentacao.class);
+                            Log.d("dadosRetorno", "onDataChange: " + movimentacao.toString() + "\n");
+                            movimentacoes.add(movimentacao);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     public void recuperarResumo() {
@@ -95,16 +114,18 @@ public class PrincipalActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Usuario usuario = snapshot.getValue(Usuario.class);
-                despesaTotal = usuario.getDespesaTotal();
-                receitaTotal = usuario.getReceitaTotal();
-                resumoTotal = receitaTotal - despesaTotal;
-                DecimalFormat df = new DecimalFormat("0.00");
-                String resultadoFormatado = df.format(resumoTotal);
-                if (resultadoFormatado.contains(".")) {
-                    resultadoFormatado = resultadoFormatado.replace(".", ",");
+                if (usuario != null) {
+                    despesaTotal = usuario.getDespesaTotal();
+                    receitaTotal = usuario.getReceitaTotal();
+                    resumoTotal = receitaTotal - despesaTotal;
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    String resultadoFormatado = df.format(resumoTotal);
+                    if (resultadoFormatado.contains(".")) {
+                        resultadoFormatado = resultadoFormatado.replace(".", ",");
+                    }
+                    binding.contentPrincipal.textSaldo.setText(String.format("R$ %s", resultadoFormatado));
+                    binding.contentPrincipal.textSaudacao.setText(String.format("Olá, %s", usuario.getNome()));
                 }
-                binding.contentPrincipal.textSaldo.setText("R$ " + resultadoFormatado);
-                binding.contentPrincipal.textSaudacao.setText("Olá, " + usuario.getNome());
             }
 
             @Override
@@ -120,10 +141,21 @@ public class PrincipalActivity extends AppCompatActivity {
         calendarView.state().edit()
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
-
+        CalendarDay dataBase = calendarView.getCurrentDate();
+        iniciaMesAnoSelecionado(dataBase);
         calendarView.setOnMonthChangedListener((widget, date) -> {
-            dataPesquisa = date.getMonth() + "" + date.getYear();
+            iniciaMesAnoSelecionado(date);
+            database.removeEventListener(valueEventListenerMovimentacoes);
+            recuperaMovimentacoes();
         });
+    }
+
+    private void iniciaMesAnoSelecionado(CalendarDay dataBase) {
+        if (dataBase.getMonth() < 10) {
+            mesAnoSelecionado = "0" + dataBase.getMonth() + "" + dataBase.getYear();
+        } else {
+            mesAnoSelecionado = dataBase.getMonth() + "" + dataBase.getYear();
+        }
     }
 
     @Override
@@ -145,13 +177,15 @@ public class PrincipalActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        configuraCalendarView();
         recuperarResumo();
+        configuraCalendarView();
+        recuperaMovimentacoes();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         idUsuario.removeEventListener(evento);
+        database.removeEventListener(valueEventListenerMovimentacoes);
     }
 }
