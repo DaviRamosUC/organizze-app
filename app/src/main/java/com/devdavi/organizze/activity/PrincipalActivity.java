@@ -1,12 +1,15 @@
 package com.devdavi.organizze.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -105,15 +108,48 @@ public class PrincipalActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                /*database.child("movimentacoes")
-                        .child(ConfiguracaoFirebase.getIdUsuarioCodificado())
-                        .child(mesAnoSelecionado)
-                        .child()*/
+                excluirMovimentacao(viewHolder);
             }
         };
 
         new ItemTouchHelper(itemTouch).attachToRecyclerView(recyclerView);
 
+    }
+
+    private void excluirMovimentacao(RecyclerView.ViewHolder viewHolder) {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Excluir Movimentação da Conta");
+        dialog.setMessage("Você tem certeza que deseja realmente excluir esta movimentação da sua conta?");
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("Sim", (dialogInterface, i) -> {
+            int position = viewHolder.getAdapterPosition();
+            Movimentacao movimentacao = movimentacoes.get(position);
+            database.child("movimentacao")
+                    .child(ConfiguracaoFirebase.getIdUsuarioCodificado())
+                    .child(mesAnoSelecionado)
+                    .child(movimentacao.getId())
+                    .removeValue();
+            adapter.notifyItemRemoved(position);
+            atualizarSaldo(movimentacao);
+        }).setNegativeButton("Não", (dialogInterface, i) -> {
+            Toast.makeText(this, "Cancelado", Toast.LENGTH_LONG)
+                    .show();
+            adapter.notifyDataSetChanged();
+        });
+        dialog.create().show();
+
+
+    }
+
+    public void atualizarSaldo(Movimentacao movimentacao){
+        if(movimentacao.getTipo().equals("r")){
+            receitaTotal = receitaTotal - movimentacao.getValor();
+            idUsuario.child("receitaTotal").setValue(receitaTotal);
+        }else{
+            despesaTotal = despesaTotal - movimentacao.getValor();
+            idUsuario.child("despesaTotal").setValue(despesaTotal);
+        }
     }
 
     public void recuperaMovimentacoes() {
@@ -127,8 +163,10 @@ public class PrincipalActivity extends AppCompatActivity {
                         movimentacoes.clear();
                         for (DataSnapshot dados : snapshot.getChildren()) {
                             Movimentacao movimentacao = dados.getValue(Movimentacao.class);
-                            Log.d("dadosRetorno", "onDataChange: " + movimentacao.toString() + "\n");
-                            movimentacoes.add(movimentacao);
+                            if (movimentacao != null) {
+                                movimentacao.setId(dados.getKey());
+                                movimentacoes.add(movimentacao);
+                            }
                         }
                         adapter.notifyDataSetChanged();
                     }

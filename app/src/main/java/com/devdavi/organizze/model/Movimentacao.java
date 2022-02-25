@@ -8,6 +8,8 @@ import com.google.firebase.database.DatabaseReference;
 import java.util.Objects;
 
 public class Movimentacao {
+
+    private String id;
     private String data;
     private String categoria;
     private String descricao;
@@ -63,6 +65,14 @@ public class Movimentacao {
 
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
