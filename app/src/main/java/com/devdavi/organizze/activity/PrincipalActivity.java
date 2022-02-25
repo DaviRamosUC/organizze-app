@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -69,6 +70,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
         calendarView = binding.contentPrincipal.calendarView;
         recyclerView = binding.contentPrincipal.recyclerMovimentos;
+        swipe();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
@@ -82,6 +84,35 @@ public class PrincipalActivity extends AppCompatActivity {
         binding.menuDespesa.setOnClickListener(view -> {
             startActivity(new Intent(this, DespesasActivity.class));
         });
+
+
+    }
+
+    public void swipe() {
+
+        ItemTouchHelper.Callback itemTouch = new ItemTouchHelper.Callback() {
+            @Override
+            public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+                int dragFlags = ItemTouchHelper.ACTION_STATE_IDLE;
+                int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+                return makeMovementFlags(dragFlags, swipeFlags);
+            }
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                /*database.child("movimentacoes")
+                        .child(ConfiguracaoFirebase.getIdUsuarioCodificado())
+                        .child(mesAnoSelecionado)
+                        .child()*/
+            }
+        };
+
+        new ItemTouchHelper(itemTouch).attachToRecyclerView(recyclerView);
 
     }
 
